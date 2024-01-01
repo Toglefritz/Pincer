@@ -1,0 +1,58 @@
+# Pincer Robot Arm Controller
+## Simple Firmware
+
+This firmware is designed for the ESP32-based Pincer robot arm controller. It allows for the control of four servos via JSON commands. Each servo corresponds to a different part of the robot arm: the base, coxa, femur, and gripper.
+
+This simplified firmware eschews kinematics calculations in favor of accepting commands to directly control the angles of the robot arm's servos.
+
+## Features
+
+- Control up to four servos independently.
+- Accepts JSON formatted commands.
+- Flexible command structure allowing control of one to all four servos simultaneously.
+
+## Hardware Requirements
+
+- ESP32 microcontroller.
+- Four servos (compatible with the ESP32's voltage and current specifications).
+- Connections to servos on designated GPIO pins: A0, A1, A2, and A3.
+
+## Setup
+
+1. **Attach Servos**: Connect the base, coxa, femur, and gripper servos to the ESP32 on pins A0, A1, A2, and A3 respectively.
+2. **Programming**: Program the ESP32 with the provided firmware.
+3. **Communication Setup**: Establish a communication link (Serial or Bluetooth) between the ESP32 and the command source.
+
+## Usage
+
+Send serialized JSON strings with the desired servo positions to the ESP32. Each servo position is specified by a key in the JSON object. The keys are "base", "coxa", "femur", and "gripper". 
+
+### Example Command
+
+```json
+{
+  "base": 90,
+  "coxa": 45,
+  "femur": 75,
+  "gripper": 30
+}
+```
+
+This command will set the base servo to 90 degrees, coxa to 45 degrees, femur to 75 degrees, and gripper to 30 degrees.
+
+## Command Structure
+
+- Each command is a JSON object.
+- Each field in the JSON object is optional.
+- Fields not included in a command will leave the corresponding servo unchanged.
+- Fields included should specify the desired angle in degrees for the servo.
+
+## Communication Protocol
+
+Commands are sent to the ESP32 via Serial or Bluetooth communicationh. Ensure that the communication protocol is correctly set up and configured for both the ESP32 and the control device.
+
+## Safety and Handling
+
+- Always keep fingers and other body parts out of the robot's range of motion while the robot is powered.
+- Ensure that all servo movements are within safe operational limits.
+- Avoid sending rapid or extreme position changes to prevent damage to the servos or robot arm.
