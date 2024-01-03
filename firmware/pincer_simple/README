@@ -10,6 +10,7 @@ This simplified firmware eschews kinematics calculations in favor of accepting c
 - Control up to four servos independently.
 - Accepts JSON formatted commands.
 - Flexible command structure allowing control of one to all four servos simultaneously.
+- Control via Serial (USB) or Bluetooth.
 
 ## Hardware Requirements
 
@@ -49,7 +50,11 @@ This command will set the base servo to 90 degrees, coxa to 45 degrees, femur to
 
 ## Communication Protocol
 
-Commands are sent to the ESP32 via Serial or Bluetooth communicationh. Ensure that the communication protocol is correctly set up and configured for both the ESP32 and the control device.
+Commands are sent to the ESP32 via Serial or Bluetooth communication. The command API is the same for either communication transport and is defined in the "Usage" section above.
+
+## Bluetooth Communication
+
+One of the two supported communication transports provided by this firmware is Bluetooth Low Energy. The firmware will create a Bluetooth Low Energy device to which clients (such as a mobile app) can connect. That BLE service provides a single characteristic that can be used to send commands to move the robot arm and receive values to indicate the current position of the arm
 
 ## Safety and Handling
 
