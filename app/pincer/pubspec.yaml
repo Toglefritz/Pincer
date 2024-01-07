@@ -17,6 +17,8 @@ dependencies:
     sdk: flutter
   # Package for using Google Fonts
   google_fonts: ^6.1.0
+  # Provides a cross-platform (iOS, Android) API to request and check permissions
+  permission_handler: ^11.1.0
   # Provides runtime functionality for playing back and interacting with animations
   # built with the Rive editor
   rive: ^0.12.4

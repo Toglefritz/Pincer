@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'home_controller.dart';
 
-/// The [HomeRoute] performs initialization tasks for the app including requesting permissions and loading any
-/// connections to Pincer robot arms that may have been set up previously.
+/// The [HomeRoute] performs initialization tasks for the app.
 ///
 /// When the Pincer app initially launches, there are a number of initializations tasks to be completed. First,
 /// because the app uses Bluetooth to connect to nearby Pincer robot arm devices, the app checks that the permissions
