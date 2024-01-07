@@ -1,0 +1,6 @@
+{
+  "loading": "Loading...",
+  "@loading": {
+    "description": "A message indicating that a loading process is underway"
+  }
+}

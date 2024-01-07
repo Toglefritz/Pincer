@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:pincer/screens/home/home.dart';
 
@@ -10,10 +12,46 @@ class PincerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Pincer',
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      debugShowCheckedModeBanner: false,
+      themeMode: ThemeMode.system,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.purpleAccent),
-        useMaterial3: true,
+        brightness: Brightness.light,
+        primaryColor: const Color(0xFFE86D33),
+        primaryColorDark: const Color(0xFF23201E),
+        primaryColorLight: const Color(0xFFfEF4E3),
+        scaffoldBackgroundColor: const Color(0xFFE8D7C5),
+        textTheme: TextTheme(
+          headlineSmall: TextStyle(
+            fontFamily: GoogleFonts.robotoSerif().fontFamily,
+          ),
+          headlineMedium: TextStyle(
+            fontFamily: GoogleFonts.robotoSerif().fontFamily,
+          ),
+          headlineLarge: TextStyle(
+            fontFamily: GoogleFonts.robotoSerif().fontFamily,
+          ),
+        ),
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: const Color(0xFFE86D33),
+        primaryColorLight: const Color(0xFF23201E),
+        primaryColorDark: const Color(0xFFE8D7C5),
+        scaffoldBackgroundColor: const Color(0xFF23201E),
+        textTheme: TextTheme(
+          headlineSmall: TextStyle(
+            fontFamily: GoogleFonts.robotoSerif().fontFamily,
+          ),
+          headlineMedium: TextStyle(
+            fontFamily: GoogleFonts.robotoSerif().fontFamily,
+          ),
+          headlineLarge: TextStyle(
+            fontFamily: GoogleFonts.robotoSerif().fontFamily,
+          ),
+        ),
       ),
       home: const HomeRoute(),
     );

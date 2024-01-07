@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'home.dart';
-import 'home_view.dart';
+import 'home_view_loading.dart';
 
 /// Controller for the [HomeRoute] that contains all of the business logic used by this route.
 class HomeController extends State<HomeRoute> {
