@@ -1,6 +1,6 @@
 #include <Adafruit_NeoPixel.h>
 #include <ArduinoJson.h>
-#include <ESP32Servo.h>
+#include <Servo.h>
 #include <BLEDevice.h>
 #include <BLEServer.h>
 #include <BLEUtils.h>
@@ -31,7 +31,7 @@
 // The QT Py ESP32-C3 has a single onboard Neopixel LED
 #define NUMPIXELS 1
 
-Adafruit_NeoPixel pixels(NUMPIXELS, PIN_NEOPIXEL, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel pixels(NUMPIXELS, 7, NEO_GRB + NEO_KHZ800);
 
 // Stores the last time LED was updated
 unsigned long previousMillis = 0; 
@@ -39,17 +39,14 @@ unsigned long previousMillis = 0;
 // The interval at which to blink the LED in milliseconds
 const long interval = 500;
 
-// Define Servo objects
-Servo baseServo;
-Servo coxaServo;
-Servo femurServo;
-Servo gripperServo;
+// Define the Servo object
+Servo servo = Servo();
 
 // Pin assignments for the servos
-const int baseServoPin = 4; // A0
-const int coxaServoPin = 3; // A1
-const int femurServoPin = 1; // A2
-const int gripperServoPin = 5;
+const int baseServoPin = A0; 
+const int coxaServoPin = A1; 
+const int femurServoPin = A2;
+const int gripperServoPin = A3;
 
 /**
  * @class ServerCallbacks
@@ -153,12 +150,6 @@ void setup() {
   // Set LED brightness
   pixels.setBrightness(20);
 
-  // Attach servos to their respective pins
-  baseServo.attach(baseServoPin);
-  coxaServo.attach(coxaServoPin);
-  femurServo.attach(femurServoPin);
-  gripperServo.attach(gripperServoPin);
-
   // Create the BLE Device
   BLEDevice::init("PINCER");
 
@@ -252,7 +243,7 @@ void processCommand(const String& command) {
     Serial.print(doc["base"].as<String>());
     Serial.println(" degrees");
 
-    baseServo.write(doc["base"].as<int>());
+    servo.write(baseServoPin, doc["base"].as<int>());
   }
 
   // Check if the command JSON contains a value for the coxa servo and, if
@@ -262,7 +253,7 @@ void processCommand(const String& command) {
     Serial.print(doc["coxa"].as<String>());
     Serial.println(" degrees");
 
-    coxaServo.write(doc["coxa"].as<int>());
+    servo.write(coxaServoPin, doc["coxa"].as<int>());
   }
 
   // Check if the command JSON contains a value for the femur servo and, if
@@ -272,7 +263,7 @@ void processCommand(const String& command) {
     Serial.print(doc["femur"].as<String>());
     Serial.println(" degrees");
 
-    femurServo.write(doc["femur"].as<int>());
+    servo.write(femurServoPin, doc["femur"].as<int>());
   }
 
   // Check if the command JSON contains a value for the gripper servo and, if
@@ -282,7 +273,7 @@ void processCommand(const String& command) {
     Serial.print(doc["gripper"].as<String>());
     Serial.println(" degrees");
 
-    gripperServo.write(doc["gripper"].as<int>());
+    servo.write(gripperServoPin, doc["gripper"].as<int>());
   }
 
   // Clear the Serial buffer after the command has been processed
