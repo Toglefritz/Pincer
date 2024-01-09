@@ -1,12 +1,30 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'home.dart';
+import 'home_view.dart';
+import 'home_view_error.dart';
 import 'home_view_loading.dart';
 
 /// Controller for the [HomeRoute] that contains all of the business logic used by this route.
 class HomeController extends State<HomeRoute> {
+  /// Determines if Bluetooth permissions have been granted and the status of the Bluetooth adapter has been
+  /// checked. A value of null indicates that these two operations have not yet been completed. A value of true
+  /// indicates that both Bluetooth permissions have been granted and the Bluetooth adapter is enabled. A value
+  /// of false indicates that either Bluetooth permissions were denied or the Bluetooth adapter is disabled.
   bool? _permissionsGranted;
+
+  /// When this route is in an error state because either Bluetooth permissions were denied or because the
+  /// Bluetooth adapter is disabled, among the UI elements displayed is a flashing icon. This boolean
+  /// determines if the icon is visible.
+  bool isErrorIconVisible = true;
+
+  /// When this route is in an error state because either Bluetooth permissions were denied or because the
+  /// Bluetooth adapter is disabled, among the UI elements displayed is a flashing icon. This [Timer] controls the
+  /// flashing of this icon.
+  late Timer _timer;
 
   @override
   void initState() {
@@ -26,7 +44,16 @@ class HomeController extends State<HomeRoute> {
       _permissionsGranted = locationPermissionsGranted && bluetoothPermissionsGranted;
     });
 
-    // TODO get saved Pincer connections
+    if (_permissionsGranted == false) {
+      // Start the timer for the flashing icon effect
+      _timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
+        setState(() {
+          isErrorIconVisible = !isErrorIconVisible;
+        });
+      });
+    } else if (_permissionsGranted == true) {
+      // TODO get saved Pincer connections
+    }
   }
 
   /// Requests location permission.
@@ -54,5 +81,19 @@ class HomeController extends State<HomeRoute> {
 
   // TODO show different views based on _permissionsGranted value
   @override
-  Widget build(BuildContext context) => HomeViewLoading(this);
+  Widget build(BuildContext context) {
+    if (_permissionsGranted == null) {
+      return HomeViewLoading(this);
+    } else if (_permissionsGranted == true) {
+      return HomeView(this);
+    } else {
+      return HomeViewError(this);
+    }
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
 }

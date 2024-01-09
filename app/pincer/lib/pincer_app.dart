@@ -21,9 +21,21 @@ class PincerApp extends StatelessWidget {
         brightness: Brightness.light,
         primaryColor: const Color(0xFFE86D33),
         primaryColorDark: const Color(0xFF23201E),
-        primaryColorLight: const Color(0xFFfEF4E3),
+        primaryColorLight: const Color(0xFFFEF4E3),
         scaffoldBackgroundColor: const Color(0xFFE8D7C5),
         textTheme: TextTheme(
+          titleLarge: TextStyle(
+            fontFamily: GoogleFonts.robotoSerif().fontFamily,
+            fontWeight: FontWeight.bold,
+          ),
+          titleMedium: TextStyle(
+            fontFamily: GoogleFonts.robotoSerif().fontFamily,
+            fontWeight: FontWeight.bold,
+          ),
+          titleSmall: TextStyle(
+            fontFamily: GoogleFonts.robotoSerif().fontFamily,
+            fontWeight: FontWeight.bold,
+          ),
           headlineSmall: TextStyle(
             fontFamily: GoogleFonts.robotoSerif().fontFamily,
           ),
@@ -33,6 +45,18 @@ class PincerApp extends StatelessWidget {
           headlineLarge: TextStyle(
             fontFamily: GoogleFonts.robotoSerif().fontFamily,
           ),
+          bodySmall: TextStyle(
+            fontFamily: GoogleFonts.robotoMono().fontFamily,
+          ),
+          bodyMedium: TextStyle(
+            fontFamily: GoogleFonts.robotoMono().fontFamily,
+          ),
+          bodyLarge: TextStyle(
+            fontFamily: GoogleFonts.robotoMono().fontFamily,
+          ),
+        ),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFFE8D7C5),
         ),
       ),
       darkTheme: ThemeData(
@@ -42,6 +66,18 @@ class PincerApp extends StatelessWidget {
         primaryColorDark: const Color(0xFFE8D7C5),
         scaffoldBackgroundColor: const Color(0xFF23201E),
         textTheme: TextTheme(
+          titleLarge: TextStyle(
+            fontFamily: GoogleFonts.robotoSerif().fontFamily,
+            fontWeight: FontWeight.bold,
+          ),
+          titleMedium: TextStyle(
+            fontFamily: GoogleFonts.robotoSerif().fontFamily,
+            fontWeight: FontWeight.bold,
+          ),
+          titleSmall: TextStyle(
+            fontFamily: GoogleFonts.robotoSerif().fontFamily,
+            fontWeight: FontWeight.bold,
+          ),
           headlineSmall: TextStyle(
             fontFamily: GoogleFonts.robotoSerif().fontFamily,
           ),
@@ -50,6 +86,23 @@ class PincerApp extends StatelessWidget {
           ),
           headlineLarge: TextStyle(
             fontFamily: GoogleFonts.robotoSerif().fontFamily,
+          ),
+          bodySmall: TextStyle(
+            fontFamily: GoogleFonts.robotoMono().fontFamily,
+          ),
+          bodyMedium: TextStyle(
+            fontFamily: GoogleFonts.robotoMono().fontFamily,
+          ),
+          bodyLarge: TextStyle(
+            fontFamily: GoogleFonts.robotoMono().fontFamily,
+          ),
+        ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: const Color(0xFF23201E),
+          titleTextStyle: TextStyle(
+            fontFamily: GoogleFonts.robotoSerif().fontFamily,
+            fontWeight: FontWeight.bold,
+            color: const Color(0xFF23201E),
           ),
         ),
       ),

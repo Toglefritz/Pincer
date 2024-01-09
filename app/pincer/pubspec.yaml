@@ -22,6 +22,8 @@ dependencies:
   # Provides runtime functionality for playing back and interacting with animations
   # built with the Rive editor
   rive: ^0.12.4
+  # Plugin for reading and writing values to local storage
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,18 @@
 {
+  "bluetoothError": "Bluetooth Error",
+  "@bluetoothError": {
+    "description": "A page title to indicate an error condition related to Bluetooth"
+  },
+  "checkSettings": "Ensure that Bluetooth is enabled and that Bluetooth permissions have been granted.",
+  "@checkSettings": {
+    "description": "A message displayed to indicate an issue with Bluetooth settings"
+  },
   "loading": "Loading...",
   "@loading": {
     "description": "A message indicating that a loading process is underway"
+  },
+  "pincer": "Pincer",
+  "@pincer": {
+    "description": "The name of the app"
   }
 }
