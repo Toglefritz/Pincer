@@ -16,8 +16,10 @@
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
-		E5601E422B4D85FF00BC3BC8 /* darkIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5601E412B4D85FF00BC3BC8 /* darkIcon@2x.png */; };
-		E5601E442B4D860500BC3BC8 /* darkIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5601E432B4D860400BC3BC8 /* darkIcon@3x.png */; };
+		E57498382B4E4CF4007CD60E /* darkIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E57498342B4E4CF4007CD60E /* darkIcon@2x.png */; };
+		E57498392B4E4CF4007CD60E /* darkIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E57498352B4E4CF4007CD60E /* darkIcon@3x.png */; };
+		E574983A2B4E4CF4007CD60E /* darkIconIpad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E57498362B4E4CF4007CD60E /* darkIconIpad@2x.png */; };
+		E574983B2B4E4CF4007CD60E /* darkIconIpadPro@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E57498372B4E4CF4007CD60E /* darkIconIpadPro@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,8 +68,10 @@
 		A7781AA7AE922F0C2C67F3E6 /* Pods-RunnerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release.xcconfig"; sourceTree = "<group>"; };
 		C918349B38A19F9186F13724 /* Pods-RunnerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D2BE8A987831EB778734A4E7 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
-		E5601E412B4D85FF00BC3BC8 /* darkIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "darkIcon@2x.png"; path = "../../../../../../../../Downloads/darkIcon@2x.png"; sourceTree = "<group>"; };
-		E5601E432B4D860400BC3BC8 /* darkIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "darkIcon@3x.png"; path = "../../../../../../../../Downloads/darkIcon@3x.png"; sourceTree = "<group>"; };
+		E57498342B4E4CF4007CD60E /* darkIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "darkIcon@2x.png"; sourceTree = "<group>"; };
+		E57498352B4E4CF4007CD60E /* darkIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "darkIcon@3x.png"; sourceTree = "<group>"; };
+		E57498362B4E4CF4007CD60E /* darkIconIpad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "darkIconIpad@2x.png"; sourceTree = "<group>"; };
+		E57498372B4E4CF4007CD60E /* darkIconIpadPro@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "darkIconIpadPro@2x.png"; sourceTree = "<group>"; };
 		F41C3D0F6FEC00E74B9760CD /* Pods_RunnerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RunnerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -172,8 +176,10 @@
 		E5601E3C2B4D84DB00BC3BC8 /* DynamicAppIcons */ = {
 			isa = PBXGroup;
 			children = (
-				E5601E412B4D85FF00BC3BC8 /* darkIcon@2x.png */,
-				E5601E432B4D860400BC3BC8 /* darkIcon@3x.png */,
+				E57498342B4E4CF4007CD60E /* darkIcon@2x.png */,
+				E57498352B4E4CF4007CD60E /* darkIcon@3x.png */,
+				E57498362B4E4CF4007CD60E /* darkIconIpad@2x.png */,
+				E57498372B4E4CF4007CD60E /* darkIconIpadPro@2x.png */,
 			);
 			path = DynamicAppIcons;
 			sourceTree = "<group>";
@@ -275,9 +281,11 @@
 			files = (
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
-				E5601E422B4D85FF00BC3BC8 /* darkIcon@2x.png in Resources */,
+				E57498382B4E4CF4007CD60E /* darkIcon@2x.png in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
-				E5601E442B4D860500BC3BC8 /* darkIcon@3x.png in Resources */,
+				E57498392B4E4CF4007CD60E /* darkIcon@3x.png in Resources */,
+				E574983B2B4E4CF4007CD60E /* darkIconIpadPro@2x.png in Resources */,
+				E574983A2B4E4CF4007CD60E /* darkIconIpad@2x.png in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
