@@ -36,11 +36,10 @@ class HomeController extends State<HomeRoute> {
   /// step. If either the adapter is turned off or Bluetooth permissions were denied, [_permissionsGranted] is set to
   /// false and an error page is displayed.
   Future<void> _checkBluetoothAdapterAndRequestPermissions() async {
-    bool locationPermissionsGranted = await _requestLocationPermission();
     bool bluetoothPermissionsGranted = await _requestBluetoothPermissions();
 
     setState(() {
-      _permissionsGranted = locationPermissionsGranted && bluetoothPermissionsGranted;
+      _permissionsGranted = bluetoothPermissionsGranted;
     });
 
     if (_permissionsGranted == false) {
@@ -55,23 +54,11 @@ class HomeController extends State<HomeRoute> {
     }
   }
 
-  /// Requests location permission.
-  ///
-  /// Location permission is required for BLE communication in many platforms, including Android and iOS, due to
-  /// the need for location data to scan for BLE devices.
-  Future<bool> _requestLocationPermission() async {
-    if (await Permission.locationWhenInUse.request().isGranted) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   /// Requests Bluetooth permissions.
   ///
   /// These permissions are essential for establishing BLE connections and communicating with the Pincer robot arm.
   Future<bool> _requestBluetoothPermissions() async {
-    if (await Permission.bluetooth.request().isGranted && await Permission.bluetoothConnect.request().isGranted) {
+    if (await Permission.bluetooth.request().isGranted) {
       return true;
     } else {
       return false;
