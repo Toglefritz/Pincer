@@ -140,6 +140,35 @@ class DescriptorCallbacks : public BLEDescriptorCallbacks {
     }
 };
 
+/**
+ * Retrieves a shortened version of the ESP32's MAC address.
+ *
+ * This function is designed to provide a probably unique identifier for
+ * each individual Pincer robot arm by utilizing the last four digits of
+ * the ESP32's MAC address. The MAC address is a hardware-based number
+ * usually unique to each ESP32 chip. By using the last four digits, we 
+ * create a shorter identifier that is more user-friendly while still 
+ * maintaining a high probability of uniqueness within a localized set of devices.
+ *
+ * The function first obtains the full MAC address, converts it to a String, 
+ * and then extracts the last four digits. This shortened MAC can be used
+ * for identifying individual robot arms in scenarios where multiple devices 
+ * might be present, such as in a classroom or a workshop.
+ *
+ * @return A String representing the last four digits of the MAC address.
+ */
+String getShortMAC() {
+  uint8_t baseMac[6];
+  // Get the base MAC address
+  esp_read_mac(baseMac, ESP_MAC_WIFI_STA);
+
+  // Convert base MAC address to String
+  String macStr = String(ESP.getEfuseMac());
+
+  // Extract and return the last four digits
+  return macStr.substring(macStr.length() - 5);
+}
+
 void setup() {
   Serial.begin(115200);
   Serial.flush(); // Clear the buffer
@@ -151,7 +180,8 @@ void setup() {
   pixels.setBrightness(20);
 
   // Create the BLE Device
-  BLEDevice::init("PINCER");
+  String bleDeviceName = "Pincer " + getShortMAC();
+  BLEDevice::init(bleDeviceName.c_str());
 
   // Configure BLE Security settings
   // Create a new instance of the BLESecurity class, which is used to manage BLE 
@@ -209,7 +239,7 @@ void setup() {
 
   // Hello
   Serial.println("");
-  Serial.println("PINCER ONLINE");
+  Serial.println("Pincer " + getShortMAC());
   Serial.println("Ready to pinch...");
 }
 
