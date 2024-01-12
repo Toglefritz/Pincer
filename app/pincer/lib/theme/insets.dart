@@ -15,8 +15,11 @@ class Insets {
   /// Large spacing value, used for more pronounced spacing.
   static const double large = 24.0;
 
-  /// Extra large spacing value, for maximum spacing.
+  /// Extra large spacing value, for large spacing.
   static const double extraLarge = 32.0;
+
+  /// Extra, extra large spacing value, for maximum spacing.
+  static const double extraExtraLarge = 128.0;
 
   /// EdgeInsets with small spacing for all sides.
   static const EdgeInsets paddingSmall = EdgeInsets.all(small);
@@ -29,4 +32,7 @@ class Insets {
 
   /// EdgeInsets with extra large spacing for all sides.
   static const EdgeInsets paddingExtraLarge = EdgeInsets.all(extraLarge);
+
+  /// EdgeInsets with maximum spacing for all sides.
+  static const EdgeInsets paddingExtraExtraLarge = EdgeInsets.all(extraExtraLarge);
 }

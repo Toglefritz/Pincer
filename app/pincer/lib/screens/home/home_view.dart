@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pincer/theme/insets.dart';
 
 import 'home_controller.dart';
 
@@ -18,23 +19,73 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text(
           AppLocalizations.of(context)!.pincer,
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                color: Theme.of(context).primaryColorDark,
+              ),
         ),
       ),
       body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/pincer_assembly_isometric.png',
-                height: 161.5,
+        child: CustomScrollView(
+          physics: const ClampingScrollPhysics(),
+          slivers: [
+            SliverPadding(
+              padding: const EdgeInsets.only(
+                top: Insets.extraExtraLarge,
               ),
-            ],
-          ),
+              sliver: SliverToBoxAdapter(
+                child: Image.asset(
+                  'assets/pincer_assembly_isometric.png',
+                  height: 250,
+                ),
+              ),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.only(
+                top: Insets.medium,
+              ),
+              sliver: SliverToBoxAdapter(
+                child: Text(
+                  AppLocalizations.of(context)!.noRobotArmsMessage,
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColorDark,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: Insets.extraExtraLarge,
+                      vertical: Insets.extraLarge,
+                    ),
+                    child: ElevatedButton(
+                      onPressed: state.onAddPressed,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: Insets.medium,
+                        ),
+                        child: Text(
+                          AppLocalizations.of(context)!.connect,
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                color: Theme.of(context).primaryColorLight,
+                              ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -24,6 +24,9 @@ class HomeViewError extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           AppLocalizations.of(context)!.bluetoothError,
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            color: Theme.of(context).primaryColorDark,
+          ),
         ),
       ),
       body: SafeArea(

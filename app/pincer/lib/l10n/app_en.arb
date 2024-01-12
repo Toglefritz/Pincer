@@ -7,9 +7,17 @@
   "@checkSettings": {
     "description": "A message displayed to indicate an issue with Bluetooth settings"
   },
+  "connect": "Connect",
+  "@connect": {
+    "description": "Text for a button used to start the Pincer connection process"
+  },
   "loading": "Loading...",
   "@loading": {
     "description": "A message indicating that a loading process is underway"
+  },
+  "noRobotArmsMessage": "No Pincer robot arms connected yet.",
+  "@noRobotArmsMessage": {
+    "description": "A message communicating that no Pincer robot arms have been connected to the app yet"
   },
   "pincer": "Pincer",
   "@pincer": {

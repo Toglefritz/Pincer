@@ -65,7 +65,11 @@ class HomeController extends State<HomeRoute> {
     }
   }
 
-  // TODO show different views based on _permissionsGranted value
+  /// Handles taps on the button used to start the flow to connect to a Pincer robot arm.
+  void onAddPressed() {
+    // TODO navigate to beginning of connection flow
+  }
+
   @override
   Widget build(BuildContext context) {
     if (_permissionsGranted == null) {
