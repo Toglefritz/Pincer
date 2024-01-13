@@ -48,6 +48,9 @@ const int coxaServoPin = A1;
 const int femurServoPin = A2;
 const int gripperServoPin = A3;
 
+// The UUID used for the primary service on the ESP32 BLE peripheral.
+const String primaryUuid = "b19cdadc-434f-42e2-9478-3bbd98234567";
+
 /**
  * @class ServerCallbacks
  * @brief A class to handle BLE server connection and disconnection events.
@@ -207,7 +210,7 @@ void setup() {
   // Create the BLE service, which is a number that uniquely identifies the Pincer 
   // robot arm among other Bluetooth Low Energy devices that may be within range of 
   // the mobile  app that is trying to connect to the robot arm.
-  BLEService *pService = pServer->createService("b19cdadc-434f-42e2-9478-3bbd98234567");
+  BLEService *pService = pServer->createService(primaryUuid.c_str());
 
   // Create the open BLE characteristic, which is the one characteristic used to control
   // the Pincer robot arm in this simple firmware. The Bluetooth characteristic is a 
@@ -234,6 +237,9 @@ void setup() {
   // its BLE service so that clients, like mobile apps, can find the robot arm and 
   // begin the connectino process. Advertizing devices are the ones that show up in
   // the list when you go to add a new Bluetooth device to your phone.
+  BLEAdvertisementData advertisementData;
+  advertisementData.setCompleteServices(BLEUUID(primaryUuid.c_str()));
+  pServer->getAdvertising()->setAdvertisementData(advertisementData);
   pServer->getAdvertising()->start();
   Serial.println("BLE advertising started");
 
