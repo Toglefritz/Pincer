@@ -15,6 +15,10 @@
   "@loading": {
     "description": "A message indicating that a loading process is underway"
   },
+  "noDevicesFound": "No devices found",
+  "@noDevicesFound": {
+    "description": "An error message communicating that no devices were detected by the Bluetooth scan"
+  },
   "noRobotArmsMessage": "No Pincer robot arms connected yet.",
   "@noRobotArmsMessage": {
     "description": "A message communicating that no Pincer robot arms have been connected to the app yet"
@@ -38,5 +42,9 @@
   "signalStrength": "Signal strength",
   "@signalStrength": {
     "description": "A label for the RSSI indicator in the BLE scan list"
+  },
+  "tryAgain": "Try again",
+  "@tryAgain": {
+    "description": "A CTA used during error conditions"
   }
 }

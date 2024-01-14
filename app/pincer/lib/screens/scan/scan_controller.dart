@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pincer/screens/home/home.dart';
+import 'package:pincer/screens/scan/scan_view_error.dart';
 import 'package:pincer/services/shared_preferences/shared_preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,12 +31,64 @@ class ScanController extends State<ScanRoute> {
   /// The index of the [discoveredDevices] to display in the [ScanView].
   int currentIndex = 0;
 
+  /// A [Timer] used to trigger timeout condition of no devices are detected before a timeout duration is reached.
+  Timer? _scanTimer;
+
+  /// Determines if the scan timed out without detecting any devices.
+  bool _noDevicesDetected = false;
+
+  /// When a timeout is reached before the first device is discovered by the Bluetooth scanning process, this route
+  /// will present an error condition. Among the UI elements displayed is a flashing icon. This [Timer] controls the
+  /// flashing of this icon.
+  Timer? _iconAnimationTimer;
+
+  /// When this route is in an error state because a timeout was reached before the first device was detected by
+  /// the Bluetooth scan, among the UI elements displayed is a flashing icon. This boolean determines if the icon is
+  /// visible.
+  bool isErrorIconVisible = true;
+
   @override
   void initState() {
     // Start the scan as soon as the screen loads
     _startBluetoothScan();
 
+    // Start a timeout to trigger an error condition if at least one Pincer device is not discovered before the
+    // timeout is reached.
+    _startScanTimeout();
+
     super.initState();
+  }
+
+  /// Starts a timer for a 4-second timeout used to trigger an error condition if no devices are detected by the
+  /// Bluetooth scan before the timeout is reached.
+  ///
+  /// There are various scenarios in which the Bluetooth scan may fail to detect a Pincer device. In order to avoid
+  /// excessive battery drain on the mobile device or a poor user experience caused by a perpetual loading state, a
+  /// timeout is used to stop the scan and deliver an error message if no devices are detected before the timeout
+  /// expires.
+  void _startScanTimeout() {
+    _scanTimer = Timer(const Duration(seconds: 4), handleScanTimeout);
+  }
+
+  /// Handles the scenario when the scan timer completes. When the timer completes, this function checks if any devices
+  /// were discovered. If none were discovered, an error condition is triggered.
+  void handleScanTimeout() {
+    if (discoveredDevices.isEmpty) {
+      debugPrint('No Pincer devices found');
+
+      // Stop the scan
+      _scanStream?.cancel();
+
+      _iconAnimationTimer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
+        setState(() {
+          isErrorIconVisible = !isErrorIconVisible;
+        });
+      });
+
+      setState(() {
+        _noDevicesDetected = true;
+      });
+    }
   }
 
   /// Handles taps on the back button.
@@ -113,6 +166,13 @@ class ScanController extends State<ScanRoute> {
     }
   }
 
+  /// Handles changes in the "Page" used to present a list of devices detected by the Bluetooth scan.
+  void onResultsPageChanged(int index) {
+    setState(() {
+      currentIndex = index;
+    });
+  }
+
   /// Handles taps on the action button in the [AppBar].
   ///
   /// This button is used to start or stop the Bluetooth scan. If a scan is in progress, as determined by the
@@ -166,19 +226,36 @@ class ScanController extends State<ScanRoute> {
     );
   }
 
+  /// Handles taps on the button used to restart the scan after it times out.
+  void restartScan() {
+    // Reset the error condition
+    setState(() {
+      _noDevicesDetected = false;
+    });
+
+    // Start a new Bluetooth scan
+    _startBluetoothScan();
+
+    // Start a new timeout
+    _scanTimer?.cancel();
+    _startScanTimeout();
+  }
+
   @override
-  Widget build(BuildContext context) => ScanView(this);
+  Widget build(BuildContext context) {
+    if (_noDevicesDetected) {
+      return ScanViewError(this);
+    } else {
+      return ScanView(this);
+    }
+  }
 
   @override
   void dispose() {
     _scanStream?.cancel();
+    _scanTimer?.cancel();
+    _iconAnimationTimer?.cancel();
 
     super.dispose();
-  }
-
-  void onResultsPageChanged(int index) {
-    setState(() {
-      currentIndex = index;
-    });
   }
 }
