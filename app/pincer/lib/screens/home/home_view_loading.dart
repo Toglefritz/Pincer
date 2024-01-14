@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rive/rive.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../components/loading_indicator.dart';
 import 'home_controller.dart';
 
 /// View for the [HomeRoute]. The view is purely declarative and references the [HomeController] for all business logic.
@@ -18,21 +18,8 @@ class HomeViewLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(
-              width: 200,
-              height: 161.5,
-              child: RiveAnimation.asset(
-                'assets/pincer_loading_indicator.riv',
-              ),
-            ),
-            Text(
-              AppLocalizations.of(context)!.loading,
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-          ],
+        child: LoadingIndicator(
+          message: AppLocalizations.of(context)!.loading,
         ),
       ),
     );

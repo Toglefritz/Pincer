@@ -91,6 +91,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_splendid_ble:
+    dependency: "direct main"
+    description:
+      name: flutter_splendid_ble
+      sha256: e866c11fb442b2117e7ca286e1a9a3965f573a360e54cd988ce2e59d72a9b367
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter

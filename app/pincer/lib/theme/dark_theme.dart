@@ -28,7 +28,8 @@ final ThemeData darkTheme = ThemeData(
       fontFamily: GoogleFonts.robotoSerif().fontFamily,
     ),
     headlineLarge: TextStyle(
-      fontFamily: GoogleFonts.robotoSerif().fontFamily,
+      fontFamily: GoogleFonts.robotoMono().fontFamily,
+      fontSize: 64,
     ),
     bodySmall: TextStyle(
       fontFamily: GoogleFonts.robotoMono().fontFamily,
@@ -54,6 +55,16 @@ final ThemeData darkTheme = ThemeData(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
+    ),
+  ),
+  cardTheme: CardTheme(
+    color: const Color(0xFFE8D7C5),
+    shape: RoundedRectangleBorder(
+      side: const BorderSide(
+        color: Color(0xFFE86D33),
+        width: 3.0,
+      ),
+      borderRadius: BorderRadius.circular(12.0),
     ),
   ),
 );

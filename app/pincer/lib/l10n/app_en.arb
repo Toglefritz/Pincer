@@ -22,5 +22,17 @@
   "pincer": "Pincer",
   "@pincer": {
     "description": "The name of the app"
+  },
+  "scanning": "Scanning...",
+  "@scanning": {
+    "description": "A message displayed while a BLE scan is in progress"
+  },
+  "selectRobot": "Select a robot",
+  "@selectRobot": {
+    "description": "The title displayed on the BLE scan page"
+  },
+  "signalStrength": "Signal strength",
+  "@signalStrength": {
+    "description": "A label for the RSSI indicator in the BLE scan list"
   }
 }

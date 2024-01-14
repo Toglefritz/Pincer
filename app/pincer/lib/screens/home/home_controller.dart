@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:pincer/screens/scan/scan_route.dart';
 
 import 'home.dart';
 import 'home_view.dart';
@@ -66,8 +67,15 @@ class HomeController extends State<HomeRoute> {
   }
 
   /// Handles taps on the button used to start the flow to connect to a Pincer robot arm.
-  void onAddPressed() {
-    // TODO navigate to beginning of connection flow
+  Future<void> onAddPressed() async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const ScanRoute(),
+      ),
+    );
+
+    // TODO reload list
   }
 
   @override
