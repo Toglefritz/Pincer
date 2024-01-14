@@ -87,7 +87,9 @@ class HomeController extends State<HomeRoute> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => const ScanRoute(),
+        builder: (context) => ScanRoute(
+          excludedDevices: devices ?? [],
+        ),
       ),
     );
   }

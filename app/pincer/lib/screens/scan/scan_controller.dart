@@ -96,7 +96,14 @@ class ScanController extends State<ScanRoute> {
 
   /// A callback used each time a new device is discovered by the Bluetooth scan.
   void _onDeviceDetected(BleDevice device) {
-    debugPrint('Discovered Pincer device, ${device.name}');
+    debugPrint('Discovered Pincer device, ${device.name}, with address, ${device.address}');
+
+    // Check if the device should be excluded because it is already saved to the phone.
+    if (widget.excludedDevices.where((savedDevice) => savedDevice.address == device.address).isNotEmpty) {
+      debugPrint('Ignoring excluded device, ${device.name}');
+
+      return;
+    }
 
     // Add the newly discovered device to the list only if it not already in the list
     if (discoveredDevices.where((discoveredDevice) => discoveredDevice.address == device.address).isEmpty) {
