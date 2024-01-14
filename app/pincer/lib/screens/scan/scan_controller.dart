@@ -1,5 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:pincer/screens/home/home.dart';
+import 'package:pincer/services/shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:flutter_splendid_ble/flutter_splendid_ble.dart';
 import 'package:flutter_splendid_ble/models/ble_device.dart';
@@ -33,6 +36,16 @@ class ScanController extends State<ScanRoute> {
     _startBluetoothScan();
 
     super.initState();
+  }
+
+  /// Handles taps on the back button.
+  void onBackPressed() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const HomeRoute(),
+      ),
+    );
   }
 
   /// Starts a scan for nearby Bluetooth devices and adds a listener to the stream of devices detected by the scan.
@@ -89,13 +102,6 @@ class ScanController extends State<ScanRoute> {
     if (discoveredDevices.where((discoveredDevice) => discoveredDevice.address == device.address).isEmpty) {
       setState(() {
         discoveredDevices.add(device);
-        discoveredDevices.add(device);
-        discoveredDevices.add(device);
-        discoveredDevices.add(device);
-        discoveredDevices.add(device);
-        discoveredDevices.add(device);
-        discoveredDevices.add(device);
-        discoveredDevices.add(device);
       });
     }
   }
@@ -123,7 +129,12 @@ class ScanController extends State<ScanRoute> {
   }
 
   /// Handles taps on a scan result.
-  void onResultTap(BleDevice device) {
+  ///
+  /// This function performs two tasks when a Pincer robot arm  is selected from the list of devices detected by
+  /// the BLE scan:
+  ///   1.  Save information about the Pincer device via [SharedPreferences].
+  ///   2.  Navigate to the [RobotControlRoute], providing the [Pincer] object corresponding to the selected device.
+  Future<void> onResultTap(BleDevice device) async {
     try {
       _ble.stopScan();
     } on BluetoothScanException catch (e) {
@@ -132,9 +143,11 @@ class ScanController extends State<ScanRoute> {
       return;
     }
 
+    // Stop the scan
     _scanStream?.cancel();
 
-    // TODO save connection info
+    // Save information about the selected Pincer robot arm
+    SharedPreferencesService.saveDeviceInfo(device);
 
     // TODO navigate to robot control screen
   }

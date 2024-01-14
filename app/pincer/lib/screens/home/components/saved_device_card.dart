@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:flutter_splendid_ble/models/ble_device.dart';
 import 'package:pincer/theme/insets.dart';
+import '../../../devices/pincer.dart';
 
 /// Presents information about a Pincer device discovered by the Bluetooth scanning process.
-class ScanResultCard extends StatelessWidget {
+class SavedDeviceCard extends StatelessWidget {
   /// The index of the card in the list of devices discovered by the Bluetooth scan.
   final int index;
 
-  /// The [BleDevice] discovered by the Bluetooth scanning process. This object contains information about the
-  /// device that will be displayed by this widget.
-  final BleDevice device;
+  /// The [Pincer] object constructed using information stored in local storage via [SharedPreferences].
+  final Pincer pincer;
 
   /// A function called when the [ScanResultCard] is tapped.
   final VoidCallback onTap;
 
-  const ScanResultCard({
+  const SavedDeviceCard({
     super.key,
     required this.index,
-    required this.device,
+    required this.pincer,
     required this.onTap,
   });
 
@@ -42,28 +40,26 @@ class ScanResultCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Card(
+        margin: const EdgeInsets.symmetric(
+          vertical: Insets.medium,
+          horizontal: Insets.extraExtraLarge,
+        ),
         color: Theme.of(context).primaryColorDark,
-        child: Column(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(
-                bottom: Insets.large,
+              padding: const EdgeInsets.all(
+                Insets.medium,
               ),
               child: Image.asset(
                 _selectImageAsset(),
-                height: 300,
+                width: 150,
               ),
             ),
             Text(
-              device.name?.split(' ')[0] ?? AppLocalizations.of(context)!.pincer,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: Theme.of(context).primaryColorLight,
-                  ),
-            ),
-            Text(
-              device.name?.split(' ')[1] ?? AppLocalizations.of(context)!.pincer,
-              style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+              pincer.name,
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     color: Theme.of(context).primaryColorLight,
                   ),
             ),

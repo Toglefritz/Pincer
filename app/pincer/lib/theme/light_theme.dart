@@ -26,6 +26,7 @@ final ThemeData lightTheme = ThemeData(
     ),
     headlineMedium: TextStyle(
       fontFamily: GoogleFonts.robotoSerif().fontFamily,
+      fontSize: 32,
     ),
     headlineLarge: TextStyle(
       fontFamily: GoogleFonts.robotoMono().fontFamily,
@@ -55,10 +56,6 @@ final ThemeData lightTheme = ThemeData(
   cardTheme: CardTheme(
     color: const Color(0xFF23201E),
     shape: RoundedRectangleBorder(
-      side: const BorderSide(
-        color: Color(0xFFE86D33),
-        width: 3.0,
-      ),
       borderRadius: BorderRadius.circular(12.0),
     ),
   ),

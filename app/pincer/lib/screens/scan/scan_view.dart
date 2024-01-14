@@ -23,6 +23,10 @@ class ScanView extends StatelessWidget {
                 color: Theme.of(context).primaryColorDark,
               ),
         ),
+        leading: IconButton(
+          onPressed: state.onBackPressed,
+          icon: const Icon(Icons.arrow_back),
+        ),
         actions: [
           IconButton(
             onPressed: state.onActionButtonPressed,
@@ -57,6 +61,7 @@ class ScanView extends StatelessWidget {
                       return ScanResultCard(
                         index: index,
                         device: state.discoveredDevices[index],
+                        onTap: () => state.onResultTap(state.discoveredDevices[index]),
                       );
                     },
                   ),

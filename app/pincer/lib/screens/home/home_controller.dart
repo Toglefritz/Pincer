@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:pincer/devices/pincer.dart';
 import 'package:pincer/screens/scan/scan_route.dart';
+import 'package:pincer/services/shared_preferences/shared_preferences.dart';
 
 import 'home.dart';
 import 'home_view.dart';
@@ -24,7 +26,12 @@ class HomeController extends State<HomeRoute> {
   /// When this route is in an error state because either Bluetooth permissions were denied or because the
   /// Bluetooth adapter is disabled, among the UI elements displayed is a flashing icon. This [Timer] controls the
   /// flashing of this icon.
-  late Timer _timer;
+  Timer? _timer;
+
+  /// A list of devices that were previously connected to the app. Information about these devices is retrieved
+  /// from [SharedPreferences].
+  // TODO convert to use custom class
+  List<Pincer>? devices;
 
   @override
   void initState() {
@@ -51,8 +58,17 @@ class HomeController extends State<HomeRoute> {
         });
       });
     } else if (_permissionsGranted == true) {
-      // TODO get saved Pincer connections
+      getSavedDevices();
     }
+  }
+
+  /// Retrieves a list of saved devices from [SharedPreferences].
+  Future<void> getSavedDevices() async {
+    List<Pincer> savedDevices = await SharedPreferencesService.getSavedDeviceInfo();
+
+    setState(() {
+      devices = savedDevices;
+    });
   }
 
   /// Requests Bluetooth permissions.
@@ -67,20 +83,23 @@ class HomeController extends State<HomeRoute> {
   }
 
   /// Handles taps on the button used to start the flow to connect to a Pincer robot arm.
-  Future<void> onAddPressed() async {
-    await Navigator.push(
+  void onAddPressed() {
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => const ScanRoute(),
       ),
     );
+  }
 
-    // TODO reload list
+  /// Handles taps on the saved device cards, which navigates to the control route.
+  void onSavedDeviceTap(Pincer pincer) {
+    // TODO navigate to control route
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_permissionsGranted == null) {
+    if (_permissionsGranted == null || devices == null) {
       return HomeViewLoading(this);
     } else if (_permissionsGranted == true) {
       return HomeView(this);
@@ -91,7 +110,7 @@ class HomeController extends State<HomeRoute> {
 
   @override
   void dispose() {
-    _timer.cancel();
+    _timer?.cancel();
     super.dispose();
   }
 }

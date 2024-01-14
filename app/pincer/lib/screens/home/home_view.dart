@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pincer/screens/home/components/saved_device_card.dart';
 import 'package:pincer/theme/insets.dart';
 
 import 'home_controller.dart';
@@ -31,31 +32,57 @@ class HomeView extends StatelessWidget {
         child: CustomScrollView(
           physics: const ClampingScrollPhysics(),
           slivers: [
-            SliverPadding(
-              padding: const EdgeInsets.only(
-                top: Insets.extraExtraLarge,
-              ),
-              sliver: SliverToBoxAdapter(
-                child: Image.asset(
-                  'assets/pincer_assembly_isometric.png',
-                  height: 250,
+            if (state.devices?.isEmpty == true)
+              SliverPadding(
+                padding: const EdgeInsets.only(
+                  top: Insets.extraExtraLarge,
                 ),
-              ),
-            ),
-            SliverPadding(
-              padding: const EdgeInsets.only(
-                top: Insets.medium,
-              ),
-              sliver: SliverToBoxAdapter(
-                child: Text(
-                  AppLocalizations.of(context)!.noRobotArmsMessage,
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColorDark,
+                sliver: SliverToBoxAdapter(
+                  child: Image.asset(
+                    'assets/pincer_assembly_isometric.png',
+                    height: 250,
                   ),
-                  textAlign: TextAlign.center,
                 ),
               ),
-            ),
+            if (state.devices?.isEmpty == true)
+              SliverPadding(
+                padding: const EdgeInsets.only(
+                  top: Insets.medium,
+                ),
+                sliver: SliverToBoxAdapter(
+                  child: Text(
+                    AppLocalizations.of(context)!.noRobotArmsMessage,
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColorDark,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            if (state.devices?.isNotEmpty == true)
+              SliverPadding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: Insets.medium,
+                ),
+                sliver: SliverToBoxAdapter(
+                  child: Text(
+                    AppLocalizations.of(context)!.savedDevices,
+                    style: Theme.of(context).textTheme.titleLarge,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            if (state.devices?.isNotEmpty == true)
+              SliverList.list(
+                children: List.generate(
+                  state.devices?.length ?? 0,
+                  (index) => SavedDeviceCard(
+                    index: index,
+                    pincer: state.devices![index],
+                    onTap: () => state.onSavedDeviceTap(state.devices![index]),
+                  ),
+                ),
+              ),
             SliverFillRemaining(
               hasScrollBody: false,
               child: Column(
